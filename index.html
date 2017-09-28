@@ -2,71 +2,126 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-  <title>Styles Conference</title>
+  <title>Mapping Fun</title>
    <link rel="stylesheet" href="assets/stylesheets/main.css">
 
   </head>
   <body id="top">
     <header>
       <h1>
-         <a href="index.html"> Styles Conference</a>
+         <a href="index.html">Mapping Fun</a>
        </h1>
-      <h3>August 24&ndash;26th &mdash; Chicago, IL</h3>
-       <nav>
-        <a href="index.html">Home</a>
-        <a href="speakers.html">Speakers</a>
-        <a href="schedule.html">Schedule</a>
-        <a href="venue.html">Venue</a>
-        <a href="register.html">Register</a>
-      </nav>
-    </header>
+     </header>
 
-    <section>
-      <h2>Dedicated to the Craft of Building Websites</h2>
-      <p>Every year the brightest web designers and front-end developers descend on Chicago to discuss the latest technologies. Join us this August!</p>
-      <a href="register.html">Register Now</a> <br>
-    </section>
+    <style>
+      body {
+        height: 200px;
+        background: beige;
+       }
+      .dot {
+        height: 8px; width: 40px;
+        border-radius: 4px; /* rounds corners */
+        background: blue;
+        position: absolute;
 
-    <section>
+      }
+    </style>
 
-      <section> <!-- speakers-->
-        <a href="speakers.html">
-          <h5>Speakers</h5>
-          <h3>World-Class Speakers</h3>
-        </a>
-        <p>Joining us from all around the world are over twenty fantastic speakers, here to share their stories.</p>
+    <script>
+      var numberOfDots = 100;
+      var locations = [{x:50, y:50, phone:"+1.778.987.6488"}]; // Create initial array with elements, not sure how to create it from scratch yet.
 
-      </section>
-        <a href="schedule.html">
-          <h5>Schedule</h5>
-          <h3>Lots of Talking</h3>
-        </a>
-        <p>Really great speakers, some of the best in the world besides me, I mean, I know how to speak, right?</p>
-      </section>
+      console.log("locations:", locations);
 
-      <section>
-        <a href="venue.html">
-          <h5>Venue</h5>
-          <h3>Worlds Greatest Hotel</h3>
-        </a>
-        <p>Everything is solid gold, I mean, really, solid gold. People say, I mean some people say, how does he do that?</p>
-      </section>
+      // Let's create the dots on the screen and initialize the locations array
+      for (i = 0; i < numberOfDots; i++){
+        var dot = document.createElement("div");
+        console.log("Window", i, window.innerWidth, window.innerHeight);
+        dot.className = "dot";
 
-    </section>
-    <p>Each year the brightest and the best go somewhere else and the rest of us end up here. </p>
+        if (i > 0)
+          locations.push({x:Math.random() * window.innerWidth, y:Math.random() * window.innerHeight, phone:"??"} )
+
+        console.log("New x y", locations[i]);
+        dot.style.left = locations[i].x + "px";
+        dot.style.top = locations[i].y + "px";
+        document.body.appendChild(dot);
+      };
+
+      // Let's animate it.
+      function moveDot(i) {
+        //
+
+        console.log ( "Movedot ", i, dots, locations);
+
+        locations[i].x += (Math.random() * 2 - 1);
+        locations[i].y += (Math.random() * 2 - 1);
+
+        dots[i].style.left = locations[i].x + "px";
+        dots[i].style.top = locations[i].y + "px";
+
+
+        console.log ( "Movedot after", dots, locations);
+
+      }
+
+      var dots = document.getElementsByClassName("dot");
+
+      console.log( "dots", dots );
+
+      // Animate them
+      var continueAnimation = true;
+      var t = setInterval( moveDots, 500);
+
+      function moveDots() {
+
+        for( var i=0; i< numberOfDots; i++){
+          locations[i].x += (Math.random() * 2 - 1);
+          locations[i].y += (Math.random() * 2 - 1);
+
+          dots[i].style.left = locations[i].x + "px";
+          dots[i].style.top = locations[i].y + "px";
+
+        }
+      }
+
+      </script>
+    <!-- Created the dot, and randomly distribute on screen.
+    -->
+    <button onclick= "startAnimation()">Start Animation.</button>
+    <button onclick= "stopAnimation()">Stop Animation.</button>
+    <button onclick= "showTags()">Show Tags.</button>
+    <button onclick= "hideTags()">Hide Tags.</button>
+
+
+
+
+    <script>
+      function startAnimation() {        continueAnimation = true;
+        t = setInterval( moveDots, 500);
+      }
+      function stopAnimation() {
+        clearInterval(t);
+      }
+
+      function showTags() {
+        for( var i = 0; i< numberOfDots; i++ )
+          dots[i].style.width = "40px";
+      }
+
+      function hideTags() {
+        for( var i = 0; i< numberOfDots; i++ )
+          dots[i].style.width = "8px";
+      }
+
+    </script>
+
 
     <footer>
-      <small>&copy; Styles Conference</small><br>
+      <small>&copy; Shawn Griffin</small><br>
       <a href="mailto:shawn@shawngriffin.com?subject=Reaching%20Out&body=How%20are%20you">Email Me</a>   <br>
       <a href="http://shawngriffin.com/" target="_blank">Shawn Griffin</a>   <br>
       <a href="#top">Back to top</a>
-      <nav>
-          <a href="index.html">Home</a>
-          <a href="speakers.html">Speakers</a>
-          <a href="schedule.html">Schedule</a>
-          <a href="venue.html">Venue</a>
-          <a href="register.html">Register</a>
-        </nav>
     </footer>
 
   </body>
